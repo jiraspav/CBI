@@ -20,6 +20,7 @@ public class RPNExpressionBuilder implements StandartBuilder{
     
     private ArithmeticExpression expression;
     List<ArithmeticComponent> binaryOperatorsStack = new ArrayList<>();
+    List<ArithmeticComponent> numericOperandStack = new ArrayList<>();
     ArithmeticComponent current = null;
     ArithmeticComponent root = null;
     boolean isRoot = false;
@@ -39,41 +40,41 @@ public class RPNExpressionBuilder implements StandartBuilder{
     public void createNewBinaryOperator() {
         
         ArithmeticComponent temp = new ArithmeticComponent();
-        binaryOperatorsStack.add(temp);
         
-        if(current != null){
-            current.addOperand(temp);
-            temp.setParent(current);
-        }
+        popAndSetChild(temp);
+        
+        numericOperandStack.add(temp);
+        
         current = temp;
-        isRoot = false;
-        
-        if(root == null){
-            root = current;
-            isRoot = true;
-        }
     }
 
+    private ArithmeticComponent popAndSetChild(ArithmeticComponent comp){
+    
+        int positionLast = numericOperandStack.size() -1;
+        
+        comp.addOperand(numericOperandStack.get(positionLast-1));
+        comp.addOperand(numericOperandStack.get(positionLast));
+        numericOperandStack.get(positionLast).setParent(comp);
+        numericOperandStack.get(positionLast-1).setParent(comp);
+        numericOperandStack.remove(positionLast);
+        numericOperandStack.remove(positionLast-1);
+        
+        return comp;
+        
+    }
+    
     @Override
     public void endCurrentBinaryOperator() {
-        
-        binaryOperatorsStack.remove(binaryOperatorsStack.size()-1);
-        current = binaryOperatorsStack.get(binaryOperatorsStack.size()-1);
-        
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override
     public void appendNumericOperand(String string) {
         
-        NumericOperand child = new NumericOperand(Integer.parseInt(string));
+        NumericOperand numericOperand = new NumericOperand(Integer.parseInt(string));
                 
-        while(current.getOperands().size() == 2){
-
-            endCurrentBinaryOperator();
-            
-        }
-
-        current.addOperand(child);
+        numericOperandStack.add(numericOperand);
+        
     }
 
     @Override
@@ -85,15 +86,11 @@ public class RPNExpressionBuilder implements StandartBuilder{
         
         current = operator;
         
-        if(isRoot){
-            root = current;
-        }
-        
     }
 
     private void switchOperatorsInStack(BinaryOperator operator, ArithmeticComponent current) {
         
-        for (ListIterator<ArithmeticComponent> it = binaryOperatorsStack.listIterator(); it.hasNext();) {
+        for (ListIterator<ArithmeticComponent> it = numericOperandStack.listIterator(); it.hasNext();) {
             ArithmeticComponent arithmeticComponent = it.next();
 
             if(arithmeticComponent.equals(current)){
@@ -110,7 +107,7 @@ public class RPNExpressionBuilder implements StandartBuilder{
 
     @Override
     public void eof() {
-        expression.setRoot(root);
+        expression.setRoot(numericOperandStack.get(0));
     }
 
     

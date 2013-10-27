@@ -86,9 +86,7 @@ public class ExpressionDirector {
         
         String[] split = string.split(" ");
         
-        for(int i = split.length-1; i >= 0; i--){
-            
-            String input = split[i];
+        for(String input : split){
             
             if(isNumber(input)){
                 

@@ -27,9 +27,9 @@ public class ArithmeticExpressionCreator
         
          ArithmeticExpressionCreator creator = new ArithmeticExpressionCreator();
          
-        //ArithmeticExpression createExpression1 = creator.createExpressionFromRPN("3 1 - 4 + 2 +");
-        ArithmeticExpression createExpression2 = creator.createExpression1();
-        creator.soutInOrderTree(createExpression2.getRoot());
+        ArithmeticExpression createExpression1 = creator.createExpressionFromRPN("1 2 3 + -");
+        //ArithmeticExpression createExpression2 = creator.createExpression1();
+        creator.soutInOrderTree(createExpression1.getRoot());
         
         /*Iterator<ExpressionElement> inOrderIterator = creator.createExpression1().getInOrderIterator();
         while (inOrderIterator.hasNext()) {
@@ -86,7 +86,7 @@ public class ArithmeticExpressionCreator
 		return e;*/
                 ExpressionDirector director = new ExpressionDirector();
                 //( ( (1 + 2) - 3) + 4) + 5
-                ArithmeticExpression expression = director.buildExpression(new ArithmeticExpressionBuilder(), "(1 + (2 - 3) ) + ( (4 + 5) - 6)");
+                ArithmeticExpression expression = director.buildExpression(new ArithmeticExpressionBuilder(), "3 - (1 + 2)");
                 
                 return expression;
                 

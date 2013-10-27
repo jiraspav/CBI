@@ -11,7 +11,7 @@ public class ArithmeticExpression
 	
 	public Integer evaluate()
 	{
-		return ((BinaryOperator)root).evaluate();
+		return root.evaluate();
 	}
 	
 	public void setRoot(ArithmeticComponent root)

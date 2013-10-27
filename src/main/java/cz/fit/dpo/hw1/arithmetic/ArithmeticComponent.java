@@ -90,6 +90,11 @@ public class ArithmeticComponent {
         
     }
     
+    public Integer evaluate(){
+        
+        return value;
+        
+    }
   
     public void setParent(ArithmeticComponent o)
     {
