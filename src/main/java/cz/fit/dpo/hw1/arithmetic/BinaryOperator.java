@@ -1,8 +1,5 @@
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
-import main.java.cz.fit.dpo.hw1.arithmetic.iterator.InOrderIterator;
-import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
-
 
 /**
  * Represents the Binary operations like + - etc.
@@ -30,7 +27,8 @@ public abstract class BinaryOperator extends ArithmeticComponent
 		super(firstOperand, secondOperand);
 	}
 	
-
+        
+        
 	
 	public Integer evaluate()
 	{

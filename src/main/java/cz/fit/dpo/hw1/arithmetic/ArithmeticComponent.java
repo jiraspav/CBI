@@ -7,6 +7,7 @@ package main.java.cz.fit.dpo.hw1.arithmetic;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.ListIterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.iterator.InOrderIterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
 
@@ -29,14 +30,12 @@ public class ArithmeticComponent {
         this.value = value;
     }
     
-    public ArithmeticComponent(ArithmeticComponent copy) {
+    public ArithmeticComponent(ArithmeticComponent copyFrom) {
         this();
         
-        if(copy != null){
+        if(copyFrom != null){
         
-            operands = copy.getOperands();
-            setParent(copy.getParent());
-            setParentForOperands();
+            copyChildrenAndParents(copyFrom);
             
         }
         
@@ -56,16 +55,33 @@ public class ArithmeticComponent {
             
     }
     
-    public boolean isBinaryOperator(){
+    private void setChildForParent(ArithmeticComponent parent, ArithmeticComponent child){
         
-        if(getFirstOperand() == null || getSecondOperand() == null){
-            return false;
+        if(parent != null){
+
+            List<ArithmeticComponent> children = parent.getOperands();
+
+
+            for (ListIterator<ArithmeticComponent> it = children.listIterator(); it.hasNext();) {
+                ArithmeticComponent arithmeticComponent = it.next();
+
+                if(arithmeticComponent.equals(child)){
+                    it.set(this);
+                    break;
+                }
+            }
+
         }
-        return true;
+        
     }
     
-    public boolean isNumericOperand(){
-        return !isBinaryOperator();
+    public final void copyChildrenAndParents(ArithmeticComponent copyFrom){
+        
+        this.setOperands(copyFrom.getOperands());
+        this.setParentForOperands();
+        this.setParent(copyFrom.getParent());
+        this.setChildForParent(copyFrom.getParent(), copyFrom);
+        
     }
     
     public void addOperand(ArithmeticComponent comp){

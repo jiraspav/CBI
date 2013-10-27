@@ -1,6 +1,7 @@
 package main.java.cz.fit.dpo.hw1.arithmetic.iterator;
 
 import java.util.Iterator;
+import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
 import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 
@@ -8,9 +9,9 @@ import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 public class PostOrderIterator implements Iterator<ExpressionElement>
 {
 
-    private BinaryOperator root;
+    private ArithmeticComponent root;
     
-    public PostOrderIterator(BinaryOperator root) {
+    public PostOrderIterator(ArithmeticComponent root) {
         this.root = root;
     }
     

@@ -7,14 +7,14 @@ import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
 
 public class ArithmeticExpression
 {
-	private BinaryOperator root;
+	private ArithmeticComponent root;
 	
 	public Integer evaluate()
 	{
-		return root.evaluate();
+		return ((BinaryOperator)root).evaluate();
 	}
 	
-	public void setRoot(BinaryOperator root)
+	public void setRoot(ArithmeticComponent root)
 	{
 		this.root = root;
 	}
@@ -27,7 +27,7 @@ public class ArithmeticExpression
 	public BinaryOperator getRoot()
 	{
 		//throw new UnsupportedOperationException("");
-            return root;
+            return (BinaryOperator) root;
 	}
 	
 	/**

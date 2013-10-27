@@ -28,144 +28,44 @@ public class ExpressionDirector {
     
     public ArithmeticExpression buildExpression(StandartBuilder builder, String expression){
         
+        builder.createNewExpression();
+        
         String[] split = expression.split(" ");
-        
-        List<ArithmeticComponent> binaryOperatorsStack = new ArrayList<>();
-        
-        ArithmeticComponent current = null;
-        ArithmeticComponent root = null;
-        boolean isRoot = false;
         
         for (String string : split) {
             
             if(string.startsWith("(")){
                 
-                ArithmeticComponent deeperComponent = new ArithmeticComponent();
-                binaryOperatorsStack.add(deeperComponent);
-                
-                if(current != null){
-                    current.addOperand(deeperComponent);
-                    deeperComponent.setParent(current);
-                }
-                current = deeperComponent;
-                
-                isRoot = false;
+                builder.createNewBinaryComponent();
                 
                 if(string.length() != 1){
-                    current = addNumericComponent(current, string, 1);
+                    builder.appendNumericOperand(string.substring(1, string.length()));
                 }
                 
             }
             else if(string.endsWith(")")){
-                
 
                 if(string.length() != 1){
-                    current = addNumericComponent(current, string, 0);
+                    builder.appendNumericOperand(string.substring(0, string.length()-1));
                 }
-                binaryOperatorsStack.remove(current);
                 
-                
-                int positionOfLast = binaryOperatorsStack.size() - 1;
-                
-                if(positionOfLast < 0){
-                    if(root == null){
-                        root = new ArithmeticComponent();
-                    }
-                    
-                    root.addOperand(current);
-                    current.setParent(root);
-                    current = root;
-                    isRoot = true;
-                }
-                else{
-                    current = (ArithmeticComponent) binaryOperatorsStack.toArray()[positionOfLast];
-                    isRoot = false;
-                }
+                builder.endCurrentBinaryComponent();
                 
             }
             else if(string.equals("+")){
                     
-                    ArithmeticComponent temp = new AddOperator(current);
-                    if(current.getParent() != null){
-
-                        List<ArithmeticComponent> operands = current.getParent().getOperands();
-
-                        
-                        for (ListIterator<ArithmeticComponent> it = operands.listIterator(); it.hasNext();) {
-                            ArithmeticComponent arithmeticComponent = it.next();
-
-                            if(arithmeticComponent.equals(current)){
-                                it.set(temp);
-                                break;
-                            }
-                        }
-
-                    }
-                    
-                    for (ListIterator<ArithmeticComponent> it = binaryOperatorsStack.listIterator(); it.hasNext();) {
-                        ArithmeticComponent arithmeticComponent = it.next();
-                        
-                        if(arithmeticComponent.equals(current)){
-                            it.set(temp);
-                            break;
-                        }
-                    }
-                    
-                    current = temp;
-
-                    if(isRoot){
-                        root = current;
-                    }
+                builder.changeComponentTo(new AddOperator());
                
             }
             else if(string.equals("-")){
                 
-                    ArithmeticComponent temp = new SubstractOperator(current);
-                    if(current.getParent() != null){
-
-                        List<ArithmeticComponent> operands = current.getParent().getOperands();
-
-                        for (ListIterator<ArithmeticComponent> it = operands.listIterator(); it.hasNext();) {
-                            ArithmeticComponent arithmeticComponent = it.next();
-
-                            if(arithmeticComponent.equals(current)){
-                                it.set(temp);
-                                break;
-                            }
-                        }
-
-                    }
-                    
-                    for (ListIterator<ArithmeticComponent> it = binaryOperatorsStack.listIterator(); it.hasNext();) {
-                        ArithmeticComponent arithmeticComponent = it.next();
-                        
-                        if(arithmeticComponent.equals(current)){
-                            it.set(temp);
-                            break;
-                        }
-                    }
-
-                    current = temp;
-
-                    if(isRoot){
-                        root = current;
-                    }
+                builder.changeComponentTo(new SubstractOperator());
                
             }
             else if(isNumber(string)){
                 
-                NumericOperand numericOperand = new NumericOperand(Integer.parseInt(string));
-                
-                if(root == null){
-                    root = new ArithmeticComponent();
-                    current = root;
-                }
-                
-                root.addOperand(numericOperand);
-                numericOperand.setParent(current);
-                isRoot = true;
-                
-                
+                builder.setUpRoot();
+                builder.appendNumericOperand(string);
                 
             }
             else{
@@ -173,49 +73,30 @@ public class ExpressionDirector {
             }
         }
         
-        ArithmeticExpression e = new ArithmeticExpression();
-        e.setRoot((BinaryOperator)root);
+        builder.eof();
         
-        
-        return e;
+        return builder.getArithmeticExpression();
     }
     
-    private ArithmeticComponent addNumericComponent(ArithmeticComponent current, String string, int position){
-        
-        NumericOperand numericOperand = new NumericOperand(Integer.valueOf(string.substring(position, position+1)));
-        numericOperand.setParent(current);
-        current.addOperand(numericOperand);
-        
-        return current;
-        
-    }
+    
 
-    public ArithmeticExpression buildRPNExpression(RPNExpressionBuilder rpnExpressionBuilder, String string) {
+    public ArithmeticExpression buildRPNExpression(RPNExpressionBuilder builder, String string) {
+        
+        builder.createNewExpression();
         
         String[] split = string.split(" ");
         
-        List<ArithmeticComponent> arithmeticComponentStack = new ArrayList<>();
+        List<ArithmeticComponent> binaryComponentStack = new ArrayList<>();
         ArithmeticComponent current = null;
         ArithmeticComponent root = null;
         
         for(int i = split.length-1; i >= 0; i--){
             
             String input = split[i];
-            System.out.println(input);
             
             if(isNumber(input)){
                 
-                NumericOperand child = new NumericOperand(Integer.parseInt(input));
-                
-                while(current.getOperands().size() == 2){
-                    
-                    System.out.println("Both operands full switching curr = "+current);
-                    arithmeticComponentStack.remove(arithmeticComponentStack.size()-1);
-                    current = arithmeticComponentStack.get(arithmeticComponentStack.size()-1);
-                    System.out.println(current);
-                }
-                
-                current.addOperand(child);
+                builder.appendNumericOperand(input);
                 
             }
             else {
@@ -224,24 +105,14 @@ public class ExpressionDirector {
                 
                 if(input.equals("+")){
                     
-                    ArithmeticComponent temp = new AddOperator();
-                    if(current != null){
-                        current.addOperand(temp);
-                        temp.setParent(current);
-                    }
-                    current = temp;
-                    
-                    arithmeticComponentStack.add(current);
-                    
-                    
-                    
-                    if(root == null){
-                        root = current;
-                    }
+                    builder.createNewBinaryComponent();
+                    builder.changeComponentTo(new AddOperator());
                     
                 }
                 else if(input.equals("-")){
 
+                    builder.createNewBinaryComponent();
+                    builder.changeComponentTo(new SubstractOperator());
                     
                     ArithmeticComponent temp = new SubstractOperator();
                     if(current != null){
@@ -250,7 +121,7 @@ public class ExpressionDirector {
                     }
                     current = temp;
                     
-                    arithmeticComponentStack.add(current);
+                    binaryComponentStack.add(current);
                     
                     if(root == null){
                         root = current;
