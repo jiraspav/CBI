@@ -73,17 +73,17 @@ public class ArithmeticExpressionCreator
 	 */
 	public ArithmeticExpression createExpression1()
 	{
-		/*ArithmeticExpression e = new ArithmeticExpression();
-		
-		NumericOperand op1 = new NumericOperand(1);
-		NumericOperand op2 = new NumericOperand(2);
-		NumericOperand op3 = new NumericOperand(3);
-		
-		BinaryOperator o2 = new AddOperator(op1, op2);
-		BinaryOperator o1 = new SubstractOperator(op3, o2);
-		
-		e.setRoot(o1);
-		return e;*/
+//		ArithmeticExpression e = new ArithmeticExpression();
+//		
+//		NumericOperand op1 = new NumericOperand(1);
+//		NumericOperand op2 = new NumericOperand(2);
+//		NumericOperand op3 = new NumericOperand(3);
+//		
+//		BinaryOperator o2 = new AddOperator(op1, op2);
+//		BinaryOperator o1 = new SubstractOperator(op3, o2);
+//		
+//		e.setRoot(o1);
+//		return e;
                 ExpressionDirector director = new ExpressionDirector();
                 //( ( (1 + 2) - 3) + 4) + 5
                 ArithmeticExpression expression = director.buildExpression(new ArithmeticExpressionBuilder(), "3 - (1 + 2)");

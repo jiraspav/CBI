@@ -1,43 +1,31 @@
 package main.java.cz.fit.dpo.hw1.arithmetic.iterator;
 
-import java.util.Iterator;
+import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
-import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
-import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.AddOperation;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.SubstractOperation;
 
+public class PostOrderIterator extends IteratorParent {
 
-public class PostOrderIterator implements Iterator<ExpressionElement>
-{
-
-    private ArithmeticComponent root;
-    
-    public PostOrderIterator(ArithmeticComponent root) {
-        this.root = root;
+    public PostOrderIterator(ArithmeticComponent root) {  
+        buildTree(root);
+        arrayIterator = array.iterator();
     }
-    
-        
-    
-        
-    
-	@Override
-	public boolean hasNext()
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public ExpressionElement next()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected void buildTree(AddOperator operator) {
+        buildTree(operator.getFirstOperand());
+        buildTree(operator.getSecondOperand());
+        array.add(new AddOperation());
+    }
 
-	@Override
-	public void remove()
-	{
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void buildTree(SubstractOperator operator) {
+        buildTree(operator.getFirstOperand());
+        buildTree(operator.getSecondOperand());
+        array.add(new SubstractOperation());
+    }
+
 
 }
