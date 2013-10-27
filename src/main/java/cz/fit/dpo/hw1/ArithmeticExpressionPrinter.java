@@ -1,10 +1,10 @@
-package cz.fit.dpo.hw1;
+package main.java.cz.fit.dpo.hw1;
 
-import cz.fit.dpo.hw1.arithmetic.AddOperator;
-import cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
-import cz.fit.dpo.hw1.arithmetic.BinaryOperator;
-import cz.fit.dpo.hw1.arithmetic.NumericOperand;
-import cz.fit.dpo.hw1.arithmetic.SubstractOperator;
+import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
+import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
+import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
+import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
+import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
 
 /**
  * Printer for {@link ArithmeticExpression}s. It can print

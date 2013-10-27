@@ -1,8 +1,9 @@
-package cz.fit.dpo.hw1.arithmetic;
+package main.java.cz.fit.dpo.hw1.arithmetic;
 
 import java.util.Iterator;
-
-import cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+import main.java.cz.fit.dpo.hw1.arithmetic.iterator.InOrderIterator;
+import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
 
 public class ArithmeticExpression
 {
@@ -25,7 +26,8 @@ public class ArithmeticExpression
 	 */
 	public BinaryOperator getRoot()
 	{
-		return root;
+		//throw new UnsupportedOperationException("");
+            return root;
 	}
 	
 	/**
@@ -35,7 +37,7 @@ public class ArithmeticExpression
 	 */
 	public Iterator<ExpressionElement> getInOrderIterator()
 	{
-		throw new UnsupportedOperationException("Not yet implemented...");
+		return new InOrderIterator(root);
 	}
 
 	/**
@@ -47,7 +49,7 @@ public class ArithmeticExpression
 	 */
 	public Iterator<ExpressionElement> getPostOrderIterator()
 	{
-		throw new UnsupportedOperationException("Not yet implemented...");
+		return new PostOrderIterator(root);
 	}
 
 }

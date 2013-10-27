@@ -1,4 +1,4 @@
-package cz.fit.dpo.hw1.arithmetic.elements;
+package main.java.cz.fit.dpo.hw1.arithmetic.elements;
 
 
 

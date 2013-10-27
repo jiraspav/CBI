@@ -1,9 +1,6 @@
-package cz.fit.dpo.hw1.arithmetic;
+package main.java.cz.fit.dpo.hw1.arithmetic;
 
-import cz.fit.dpo.hw1.arithmetic.NumericOperand;
-import cz.fit.dpo.hw1.arithmetic.AddOperator;
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 

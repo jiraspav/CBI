@@ -1,12 +1,10 @@
-package cz.fit.dpo.hw1;
+package main.java.cz.fit.dpo.hw1;
 
-import cz.fit.dpo.hw1.ArithmeticExpressionCreator;
-import cz.fit.dpo.hw1.ArithmeticExpressionPrinter;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
+import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
 
 public class ArithmeticExpressionPrinterTest
 {

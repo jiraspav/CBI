@@ -1,14 +1,11 @@
-package cz.fit.dpo.hw1.arithmetic;
+package main.java.cz.fit.dpo.hw1.arithmetic;
 
-import cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
-import static org.junit.Assert.*;
 
 import java.util.Iterator;
-
+import main.java.cz.fit.dpo.hw1.ArithmeticExpressionCreator;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+import static org.junit.Assert.*;
 import org.junit.Test;
-
-import cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
-import cz.fit.dpo.hw1.ArithmeticExpressionCreator;
 
 public class ArithmeticExpressionTest
 {

@@ -1,8 +1,7 @@
-package cz.fit.dpo.hw1;
+package main.java.cz.fit.dpo.hw1;
 
-import cz.fit.dpo.hw1.ArithmeticExpressionCreator;
+
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 public class ArithmeticExpressionCreatorTest
