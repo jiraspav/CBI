@@ -19,9 +19,9 @@ public interface StandartBuilder {
     
     public ArithmeticExpression getArithmeticExpression();
 
-    public void createNewBinaryComponent();
+    public void createNewBinaryOperator();
     
-    public void endCurrentBinaryComponent();
+    public void endCurrentBinaryOperator();
     
     public void appendNumericOperand(String string);
     

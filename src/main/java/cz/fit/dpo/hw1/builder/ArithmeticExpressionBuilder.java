@@ -37,7 +37,7 @@ public class ArithmeticExpressionBuilder implements StandartBuilder{
     }
 
     @Override
-    public void createNewBinaryComponent() {
+    public void createNewBinaryOperator() {
         
         ArithmeticComponent deeperComponent = new ArithmeticComponent();
         binaryOperatorsStack.add(deeperComponent);
@@ -53,7 +53,7 @@ public class ArithmeticExpressionBuilder implements StandartBuilder{
     }
 
     @Override
-    public void endCurrentBinaryComponent() {
+    public void endCurrentBinaryOperator() {
         
         binaryOperatorsStack.remove(current);
                 
@@ -100,7 +100,18 @@ public class ArithmeticExpressionBuilder implements StandartBuilder{
     @Override
     public void changeComponentTo(BinaryOperator operator) {
         
-        operator.copyChildrenAndParents(current);
+        operator.copyAndSetChildrenAndParents(current);
+        
+        switchOperatorsInStack(operator, current);
+
+        current = operator;
+
+        if(isRoot){
+            root = current;
+        }
+    }
+
+    private void switchOperatorsInStack(BinaryOperator operator, ArithmeticComponent current) {
         
         for (ListIterator<ArithmeticComponent> it = binaryOperatorsStack.listIterator(); it.hasNext();) {
             ArithmeticComponent arithmeticComponent = it.next();
@@ -110,15 +121,7 @@ public class ArithmeticExpressionBuilder implements StandartBuilder{
                 break;
             }
         }
-
-        current = operator;
-
-        if(isRoot){
-            root = current;
-        }
     }
-
-    
 
     @Override
     public void eof() {

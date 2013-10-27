@@ -32,44 +32,44 @@ public class ExpressionDirector {
         
         String[] split = expression.split(" ");
         
-        for (String string : split) {
+        for (String input : split) {
             
-            if(string.startsWith("(")){
+            if(input.startsWith("(")){
                 
-                builder.createNewBinaryComponent();
+                builder.createNewBinaryOperator();
                 
-                if(string.length() != 1){
-                    builder.appendNumericOperand(string.substring(1, string.length()));
+                if(input.length() != 1){
+                    builder.appendNumericOperand(input.substring(1, input.length()));
                 }
                 
             }
-            else if(string.endsWith(")")){
+            else if(input.endsWith(")")){
 
-                if(string.length() != 1){
-                    builder.appendNumericOperand(string.substring(0, string.length()-1));
+                if(input.length() != 1){
+                    builder.appendNumericOperand(input.substring(0, input.length()-1));
                 }
                 
-                builder.endCurrentBinaryComponent();
+                builder.endCurrentBinaryOperator();
                 
             }
-            else if(string.equals("+")){
+            else if(input.equals("+")){
                     
                 builder.changeComponentTo(new AddOperator());
                
             }
-            else if(string.equals("-")){
+            else if(input.equals("-")){
                 
                 builder.changeComponentTo(new SubstractOperator());
                
             }
-            else if(isNumber(string)){
+            else if(isNumber(input)){
                 
                 builder.setUpRoot();
-                builder.appendNumericOperand(string);
+                builder.appendNumericOperand(input);
                 
             }
             else{
-                throw new NumberFormatException("Dont know how to do it :(");
+                throw new IllegalArgumentException("Dont know how to do that: "+input);
             }
         }
         
@@ -86,10 +86,6 @@ public class ExpressionDirector {
         
         String[] split = string.split(" ");
         
-        List<ArithmeticComponent> binaryComponentStack = new ArrayList<>();
-        ArithmeticComponent current = null;
-        ArithmeticComponent root = null;
-        
         for(int i = split.length-1; i >= 0; i--){
             
             String input = split[i];
@@ -101,31 +97,17 @@ public class ExpressionDirector {
             }
             else {
                 
-                
-                
                 if(input.equals("+")){
                     
-                    builder.createNewBinaryComponent();
+                    builder.createNewBinaryOperator();
                     builder.changeComponentTo(new AddOperator());
                     
                 }
                 else if(input.equals("-")){
 
-                    builder.createNewBinaryComponent();
+                    builder.createNewBinaryOperator();
                     builder.changeComponentTo(new SubstractOperator());
-                    
-                    ArithmeticComponent temp = new SubstractOperator();
-                    if(current != null){
-                        current.addOperand(temp);
-                        temp.setParent(current);
-                    }
-                    current = temp;
-                    
-                    binaryComponentStack.add(current);
-                    
-                    if(root == null){
-                        root = current;
-                    }
+                  
                 }
                 else{
 
@@ -137,10 +119,9 @@ public class ExpressionDirector {
             
         }
         
-        ArithmeticExpression e = new ArithmeticExpression();
-        e.setRoot((BinaryOperator)root);
+        builder.eof();
         
-        return e;
+        return builder.getArithmeticExpression();
     }
     
     private boolean isNumber(String string){

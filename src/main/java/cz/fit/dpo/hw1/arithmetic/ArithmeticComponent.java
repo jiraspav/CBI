@@ -35,7 +35,7 @@ public class ArithmeticComponent {
         
         if(copyFrom != null){
         
-            copyChildrenAndParents(copyFrom);
+            copyAndSetChildrenAndParents(copyFrom);
             
         }
         
@@ -75,7 +75,7 @@ public class ArithmeticComponent {
         
     }
     
-    public final void copyChildrenAndParents(ArithmeticComponent copyFrom){
+    public final void copyAndSetChildrenAndParents(ArithmeticComponent copyFrom){
         
         this.setOperands(copyFrom.getOperands());
         this.setParentForOperands();
