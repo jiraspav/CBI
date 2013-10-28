@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
+import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
 import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
 import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
@@ -36,33 +37,7 @@ public abstract class IteratorParent implements Iterator<ExpressionElement> {
         throw new UnsupportedOperationException();
     }
 
-    protected void buildTree(Object operator) {
-        if (operator instanceof NumericOperand) {
-            buildTree((NumericOperand) operator);
-        } else if (operator instanceof BinaryOperator) {
-            buildTree((BinaryOperator) operator);
-        } else {
-            throw new IllegalArgumentException("Unknown argument");
-        }
-    }
-
-    protected void buildTree(BinaryOperator operator) {
-        if (operator instanceof AddOperator) {
-            buildTree((AddOperator) operator);
-        } else if (operator instanceof SubstractOperator) {
-            buildTree((SubstractOperator) operator);
-        } else {
-            throw new IllegalArgumentException("Unknown argument");
-        }
-    }
-
-    protected abstract void buildTree(AddOperator operator);
-
-    protected abstract void buildTree(SubstractOperator operator);
-
-    protected void buildTree(NumericOperand operand) {
-        array.add(new Number(((NumericOperand) operand).getValue()));
-    }
+    protected abstract void buildTree(ArithmeticComponent operator);
 
     protected void addOpenBracket() {
         array.add(new OpenBracketOperation());

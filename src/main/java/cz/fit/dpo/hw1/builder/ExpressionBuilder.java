@@ -4,7 +4,6 @@
  */
 package main.java.cz.fit.dpo.hw1.builder;
 
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
 import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
 
@@ -12,7 +11,7 @@ import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
  *
  * @author Pavel
  */
-public interface StandartBuilder {
+public interface ExpressionBuilder {
     
     
     public void createNewExpression();

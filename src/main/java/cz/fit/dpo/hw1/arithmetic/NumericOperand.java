@@ -16,11 +16,5 @@ public class NumericOperand extends ArithmeticComponent{
     public NumericOperand() {
         super();
     }
-    public void sout(){
-        System.out.println("---");
-        System.out.println(this.getValue());
-        System.out.println("parent: "+this.getParent());
-        System.out.println("---");
-    }
 	
 }

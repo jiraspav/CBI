@@ -1,5 +1,8 @@
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.AddOperation;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+
 /**
  * Represents + operation
  * 
@@ -29,10 +32,9 @@ public class AddOperator extends BinaryOperator
 	{
 		return val1 + val2;
 	}
-        public void sout(){
-            System.out.println("---");
-            System.out.println(this);
-            System.out.println("parent: "+this.getParent());
-            System.out.println("---");
-        }  
+
+        @Override
+        public ExpressionElement getComponentElement() {
+            return new AddOperation();
+        }
 }

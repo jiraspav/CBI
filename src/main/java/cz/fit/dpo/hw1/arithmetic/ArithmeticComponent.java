@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 import main.java.cz.fit.dpo.hw1.arithmetic.iterator.InOrderIterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.Number;
 
 /**
  *
@@ -93,6 +95,12 @@ public class ArithmeticComponent {
     public Integer evaluate(){
         
         return value;
+        
+    }
+    
+    public ExpressionElement getComponentElement(){
+        
+        return new Number(value);
         
     }
   

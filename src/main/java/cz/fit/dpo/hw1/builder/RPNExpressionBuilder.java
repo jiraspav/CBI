@@ -16,10 +16,9 @@ import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
  *
  * @author Pavel
  */
-public class RPNExpressionBuilder implements StandartBuilder{
+public class RPNExpressionBuilder implements ExpressionBuilder{
     
     private ArithmeticExpression expression;
-    List<ArithmeticComponent> binaryOperatorsStack = new ArrayList<>();
     List<ArithmeticComponent> numericOperandStack = new ArrayList<>();
     ArithmeticComponent current = null;
     ArithmeticComponent root = null;
@@ -54,8 +53,10 @@ public class RPNExpressionBuilder implements StandartBuilder{
         
         comp.addOperand(numericOperandStack.get(positionLast-1));
         comp.addOperand(numericOperandStack.get(positionLast));
+        
         numericOperandStack.get(positionLast).setParent(comp);
         numericOperandStack.get(positionLast-1).setParent(comp);
+        
         numericOperandStack.remove(positionLast);
         numericOperandStack.remove(positionLast-1);
         

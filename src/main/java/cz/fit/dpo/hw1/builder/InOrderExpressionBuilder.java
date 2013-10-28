@@ -7,7 +7,6 @@ package main.java.cz.fit.dpo.hw1.builder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
 import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
@@ -17,7 +16,7 @@ import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
  *
  * @author Pavel
  */
-public class ArithmeticExpressionBuilder implements StandartBuilder{
+public class InOrderExpressionBuilder implements ExpressionBuilder{
 
     private ArithmeticExpression expression;
     private List<ArithmeticComponent> binaryOperatorsStack = new ArrayList<>();
@@ -56,7 +55,6 @@ public class ArithmeticExpressionBuilder implements StandartBuilder{
     public void endCurrentBinaryOperator() {
         
         binaryOperatorsStack.remove(current);
-                
                 
         int positionOfLast = binaryOperatorsStack.size() - 1;
 

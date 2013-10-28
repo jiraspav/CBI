@@ -27,7 +27,6 @@ public class ArithmeticExpression
 	public BinaryOperator getRoot()
 	{
             throw new UnsupportedOperationException("");
-            //return (BinaryOperator) root;
 	}
 	
 	/**

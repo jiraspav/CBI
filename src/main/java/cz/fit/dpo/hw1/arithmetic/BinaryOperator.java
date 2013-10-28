@@ -1,5 +1,7 @@
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+
 
 /**
  * Represents the Binary operations like + - etc.
@@ -12,7 +14,10 @@ public abstract class BinaryOperator extends ArithmeticComponent
 	
 
     protected abstract Integer evaluate(Integer val1, Integer val2);
-
+    @Override
+    public abstract ExpressionElement getComponentElement();
+    
+    
     public BinaryOperator() {
         super();
     }

@@ -1,10 +1,7 @@
 package main.java.cz.fit.dpo.hw1.arithmetic.iterator;
 
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
-import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
-import main.java.cz.fit.dpo.hw1.arithmetic.elements.AddOperation;
-import main.java.cz.fit.dpo.hw1.arithmetic.elements.SubstractOperation;
+import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
 
 public class InOrderIterator extends IteratorParent {
 
@@ -14,20 +11,17 @@ public class InOrderIterator extends IteratorParent {
     }
 
     @Override
-    protected void buildTree(AddOperator operator) {
-        addOpenBracket();
-        buildTree(operator.getFirstOperand());
-        array.add(new AddOperation());
-        buildTree(operator.getSecondOperand());
-        addCloseBracket();
+    protected final void buildTree(ArithmeticComponent operator) {
+        if(!(operator instanceof NumericOperand)){
+            addOpenBracket();
+            buildTree(operator.getFirstOperand());
+        }
+        array.add(operator.getComponentElement());
+        
+        if(!(operator instanceof NumericOperand)){
+            buildTree(operator.getSecondOperand());
+            addCloseBracket();
+        }
     }
 
-    @Override
-    protected void buildTree(SubstractOperator operator) {
-        addOpenBracket();
-        buildTree(operator.getFirstOperand());
-        array.add(new SubstractOperation());
-        buildTree(operator.getSecondOperand());
-        addCloseBracket();
-    }
 }
