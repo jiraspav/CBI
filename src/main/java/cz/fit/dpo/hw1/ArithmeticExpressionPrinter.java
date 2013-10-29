@@ -1,11 +1,7 @@
 package main.java.cz.fit.dpo.hw1;
 
 import java.util.Iterator;
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
-import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
-import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
-import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 
 /**

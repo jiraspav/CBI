@@ -3,14 +3,9 @@ package main.java.cz.fit.dpo.hw1.arithmetic.iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
-import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
-import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
-import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.CloseBracketOperation;
-import main.java.cz.fit.dpo.hw1.arithmetic.elements.Number;
+import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.OpenBracketOperation;
 
 /**
@@ -39,6 +34,8 @@ public abstract class IteratorParent implements Iterator<ExpressionElement> {
 
     protected abstract void buildTree(ArithmeticComponent operator);
 
+    
+    
     protected void addOpenBracket() {
         array.add(new OpenBracketOperation());
     }

@@ -1,27 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
-import main.java.cz.fit.dpo.hw1.arithmetic.iterator.InOrderIterator;
-import main.java.cz.fit.dpo.hw1.arithmetic.iterator.PostOrderIterator;
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.Number;
+import main.java.cz.fit.dpo.hw1.arithmetic.iterator.IteratorVisitor;
 
-/**
- *
- * @author Pavel
- */
+
 public class ArithmeticComponent {
     
     private List<ArithmeticComponent> operands;
     private ArithmeticComponent parent;
-    private Integer value;
+    protected Integer value;
     
     
     public ArithmeticComponent() {
@@ -94,7 +85,7 @@ public class ArithmeticComponent {
     
     public Integer evaluate(){
         
-        return value;
+        return null;
         
     }
     
@@ -135,15 +126,7 @@ public class ArithmeticComponent {
         return (ArithmeticComponent) getOperands().toArray()[1];
     }
 
-    public InOrderIterator inOrderIterator()
-    {
-            return new InOrderIterator(this);
-    }
-
-    public PostOrderIterator postOrderIterator()
-    {
-            return null;
-    }
+    public void createTree(IteratorVisitor visitor) {}
 
     
 

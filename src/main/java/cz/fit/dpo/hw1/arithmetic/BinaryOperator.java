@@ -1,6 +1,7 @@
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
 import main.java.cz.fit.dpo.hw1.arithmetic.elements.ExpressionElement;
+import main.java.cz.fit.dpo.hw1.arithmetic.iterator.IteratorVisitor;
 
 
 /**
@@ -32,7 +33,13 @@ public abstract class BinaryOperator extends ArithmeticComponent
             super(firstOperand, secondOperand);
     }
 	
-        
+    
+    @Override
+    public void createTree(IteratorVisitor visitor){
+    
+        visitor.buildTreeBinary(this);
+    
+    }
         
 	
     @Override

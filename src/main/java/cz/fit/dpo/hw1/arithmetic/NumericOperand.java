@@ -1,5 +1,7 @@
 package main.java.cz.fit.dpo.hw1.arithmetic;
 
+import main.java.cz.fit.dpo.hw1.arithmetic.iterator.IteratorVisitor;
+
 
 /**
  * Represents number in the arithmetic expression
@@ -17,4 +19,18 @@ public class NumericOperand extends ArithmeticComponent{
         super();
     }
 	
+    @Override
+    public Integer evaluate(){
+        
+        return value;
+        
+    }
+    
+    @Override
+    public void createTree(IteratorVisitor visitor){
+    
+        visitor.buildTreeNumeric(this);
+    
+    }
+    
 }

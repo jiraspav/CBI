@@ -1,19 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.cz.fit.dpo.hw1.builder;
 
-import main.java.cz.fit.dpo.hw1.arithmetic.AddOperator;
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticExpression;
-import main.java.cz.fit.dpo.hw1.arithmetic.BinaryOperator;
-import main.java.cz.fit.dpo.hw1.arithmetic.SubstractOperator;
 import main.java.cz.fit.dpo.hw1.builder.strategy.BuilderStrategy;
 
-/**
- *
- * @author Pavel
- */
+
 public class ExpressionDirector {
 
     private BuilderStrategy strategy;

@@ -1,9 +1,8 @@
 package main.java.cz.fit.dpo.hw1.arithmetic.iterator;
 
 import main.java.cz.fit.dpo.hw1.arithmetic.ArithmeticComponent;
-import main.java.cz.fit.dpo.hw1.arithmetic.NumericOperand;
 
-public class PostOrderIterator extends IteratorParent {
+public class PostOrderIterator extends IteratorParent implements IteratorVisitor{
 
     public PostOrderIterator(ArithmeticComponent root) {  
         buildTree(root);
@@ -12,10 +11,20 @@ public class PostOrderIterator extends IteratorParent {
 
     @Override
     protected final void buildTree(ArithmeticComponent operator) {
-        if(!(operator instanceof NumericOperand)){
-            buildTree(operator.getFirstOperand());
-            buildTree(operator.getSecondOperand());
-        }
+        operator.createTree(this);
+    }
+
+    @Override
+    public void buildTreeNumeric(ArithmeticComponent operator) {
+        array.add(operator.getComponentElement());
+    }
+
+    @Override
+    public void buildTreeBinary(ArithmeticComponent operator) {
+        
+        buildTree(operator.getFirstOperand());
+        buildTree(operator.getSecondOperand());
+        
         array.add(operator.getComponentElement());
     }
 
